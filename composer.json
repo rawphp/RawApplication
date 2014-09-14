@@ -14,12 +14,12 @@
     "require": {
         "php": ">=5.4.0",
         "rawphp/raw-base": "0.1.0",
-        "rawphp/raw-mail": "dev-master",
-        "rawphp/raw-log": "dev-master",
-        "rawphp/raw-error-handler": "dev-master",
-        "rawphp/raw-request": "dev-master",
-        "rawphp/raw-router": "dev-master",
-        "rawphp/raw-session": "dev-master",
+        "rawphp/raw-mail": "0.1.0",
+        "rawphp/raw-log": "0.1.0",
+        "rawphp/raw-error-handler": "0.1.0",
+        "rawphp/raw-request": "0.1.0",
+        "rawphp/raw-router": "0.1.0",
+        "rawphp/raw-session": "0.1.0",
         "rawphp/raw-database": "0.1.0"
     },
     "require-dev": {
