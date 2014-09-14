@@ -10,12 +10,12 @@
 ### Composer
 RawApplication is available via [Composer/Packagist](https://packagist.org/packages/rawphp/raw-application).
 
-Add `"rawphp/raw-application": "0.1.0"` to the require block in your composer.json and then run `composer install`.
+Add `"rawphp/raw-application": "0.1.1"` to the require block in your composer.json and then run `composer install`.
 
 ```json
 {
         "require": {
-            "rawphp/raw-application": "0.1.0"
+            "rawphp/raw-application": "0.1.1"
         }
 }
 ```
@@ -23,7 +23,7 @@ Add `"rawphp/raw-application": "0.1.0"` to the require block in your composer.js
 You can also simply run the following from the command line:
 
 ```sh
-composer require rawphp/raw-application "0.1.0"
+composer require rawphp/raw-application "0.1.1"
 ```
 
 ### Tarball
