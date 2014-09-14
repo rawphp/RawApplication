@@ -14,7 +14,6 @@
     "require": {
         "php": ">=5.4.0",
         "rawphp/raw-base": "0.1.0",
-        "rawphp/raw-mail": "0.1.0",
         "rawphp/raw-log": "0.1.0",
         "rawphp/raw-error-handler": "0.1.0",
         "rawphp/raw-request": "0.1.0",
