@@ -15,6 +15,7 @@
         "php": ">=5.4.0",
         "rawphp/raw-base": "0.*@dev",
         "rawphp/raw-log": "0.*@dev",
+        "rawphp/raw-mail": "0.*@dev",
         "rawphp/raw-error-handler": "0.*@dev",
         "rawphp/raw-request": "0.*@dev",
         "rawphp/raw-router": "0.*@dev",
