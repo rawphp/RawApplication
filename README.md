@@ -1,5 +1,7 @@
 # RawApplication - A Simple App Class for PHP Applications
 
+[![Build Status](https://travis-ci.org/rawphp/RawApplication.svg?branch=master)](https://travis-ci.org/rawphp/RawApplication)
+
 ## Package Features
 - A central class for an application
 - Provides access to the request, session, database, router, etc.
