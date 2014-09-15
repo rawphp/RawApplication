@@ -13,13 +13,13 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "rawphp/raw-base": "0.1.0",
-        "rawphp/raw-log": "0.1.3",
-        "rawphp/raw-error-handler": "0.1.1",
-        "rawphp/raw-request": "0.1.1",
-        "rawphp/raw-router": "0.1.1",
-        "rawphp/raw-session": "0.1.1",
-        "rawphp/raw-database": "0.1.1"
+        "rawphp/raw-base": "0.*@dev",
+        "rawphp/raw-log": "0.*@dev",
+        "rawphp/raw-error-handler": "0.*@dev",
+        "rawphp/raw-request": "0.*@dev",
+        "rawphp/raw-router": "0.*@dev",
+        "rawphp/raw-session": "0.*@dev",
+        "rawphp/raw-database": "0.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "4.2.5",
@@ -29,5 +29,10 @@
         "classmap": [
             "lib/"
         ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.x-dev"
+        }
     }
 }

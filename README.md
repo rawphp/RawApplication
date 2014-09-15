@@ -1,7 +1,6 @@
 # RawApplication - A Simple App Class for PHP Applications
 
-## Class Features
-
+## Package Features
 - A central class for an application
 - Provides access to the request, session, database, router, etc.
 
@@ -10,12 +9,12 @@
 ### Composer
 RawApplication is available via [Composer/Packagist](https://packagist.org/packages/rawphp/raw-application).
 
-Add `"rawphp/raw-application": "0.1.2"` to the require block in your composer.json and then run `composer install`.
+Add `"rawphp/raw-application": "0.*@dev"` to the require block in your composer.json and then run `composer install`.
 
 ```json
 {
         "require": {
-            "rawphp/raw-application": "0.1.2"
+            "rawphp/raw-application": "0.*@dev"
         }
 }
 ```
@@ -23,7 +22,7 @@ Add `"rawphp/raw-application": "0.1.2"` to the require block in your composer.js
 You can also simply run the following from the command line:
 
 ```sh
-composer require rawphp/raw-application "0.1.2"
+composer require rawphp/raw-application "0.*@dev"
 ```
 
 ### Tarball
