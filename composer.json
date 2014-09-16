@@ -20,7 +20,8 @@
         "rawphp/raw-request": "0.*@dev",
         "rawphp/raw-router": "0.*@dev",
         "rawphp/raw-session": "0.*@dev",
-        "rawphp/raw-database": "0.*@dev"
+        "rawphp/raw-database": "0.*@dev",
+        "rawphp/raw-file-system": "0.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "4.2.5",
