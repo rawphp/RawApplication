@@ -110,34 +110,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test log is setup correctly.
-     * 
-     * @global array $config configuration array
-     */
-    public function testLogSet( )
-    {
-        global $config;
-        
-        $this->assertNotNull( $this->app->log );
-        
-        $this->assertEquals( $config[ 'log' ][ 'class' ], get_class( $this->app->log ) );
-    }
-    
-    /**
-     * Test error handler setup correctly.
-     * 
-     * @global array $config configuration array
-     */
-    public function testErrorHandlerSet( )
-    {
-        global $config;
-        
-        $this->assertNotNull( $this->app->errorHandler );
-        
-        $this->assertEquals( $config[ 'error' ][ 'class' ], get_class( $this->app->errorHandler ) );
-    }
-    
-    /**
      * Test request setup correctly.
      * 
      * @global array $config configuration array
@@ -182,18 +154,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( $config[ 'session' ][ 'class' ], get_class( $this->app->session ) );
         
         $this->assertEquals( Session::STATUS_NONE, $this->app->session->getStatus( ) );
-    }
-    
-    /**
-     * Test database initialised.
-     */
-    public function testDatabaseSet( )
-    {
-        global $config;
-        
-        $this->assertNotNull( $this->app->db );
-        
-        $this->assertTrue( $this->app->db instanceof $config[ 'db' ][ 'class' ] );
     }
     
     /**

@@ -33,9 +33,6 @@
  * @link      http://rawphp.org/
  */
 
-//defined( 'CONTROLLERS_NAMESPACE' ) || define( 'CONTROLLERS_NAMESPACE', 'RawPHP\\Controllers\\' );
-//defined( 'MODELS_NAMESPACE' )      || define( 'MODELS_NAMESPACE', 'RawPHP\\Models\\' );
-
 $config = array();
 
 /*******************************************************************************
@@ -56,13 +53,13 @@ $config[ 'application_name' ] = 'Test RawPHP App';
  * 
  ******************************************************************************/
 
-use RawPHP\RawLog\Log;
+//use RawPHP\RawLog\Log;
 
-$config[ 'log' ][ 'class' ]          = 'RawPHP\\RawLog\\Log';
-$config[ 'log' ][ 'log_file' ]       = OUTPUT_DIR . 'log.txt';
-$config[ 'log' ][ 'log_name' ]       = 'test-log';
-$config[ 'log' ][ 'log_type' ][]     = Log::HANDLER_STANDARD_LOG;
-$config[ 'log' ][ 'log_type' ][]     = Log::HANDLER_ROTATE_LOG;
+//$config[ 'log' ][ 'class' ]          = 'RawPHP\\RawLog\\Log';
+//$config[ 'log' ][ 'log_file' ]       = OUTPUT_DIR . 'log.txt';
+//$config[ 'log' ][ 'log_name' ]       = 'test-log';
+//$config[ 'log' ][ 'log_type' ][]     = Log::HANDLER_STANDARD_LOG;
+//$config[ 'log' ][ 'log_type' ][]     = Log::HANDLER_ROTATE_LOG;
 //$config[ 'log' ][ 'log_type' ][]     = Log::HANDLER_RAW_MAIL;
 
 
@@ -72,9 +69,9 @@ $config[ 'log' ][ 'log_type' ][]     = Log::HANDLER_ROTATE_LOG;
  * These are the settings for the error handler.
  * 
  ******************************************************************************/
-$config[ 'error' ][ 'class' ]              = 'RawPHP\\RawErrorHandler\\ErrorHandler';
-$config[ 'error' ][ 'error_callback' ]     = array( 'RawPHP\\RawApplication\\Application', 'displayError' );
-$config[ 'error' ][ 'exception_callback' ] = array( 'RawPHP\\RawApplication\\', 'displayError' );
+//$config[ 'error' ][ 'class' ]              = 'RawPHP\\RawErrorHandler\\ErrorHandler';
+//$config[ 'error' ][ 'error_callback' ]     = array( 'RawPHP\\RawApplication\\Application', 'displayError' );
+//$config[ 'error' ][ 'exception_callback' ] = array( 'RawPHP\\RawApplication\\', 'displayError' );
 //$config[ 'error_handler' ][ 'shutdown_callback' ]
 
 
@@ -137,11 +134,11 @@ $config[ 'maintenance' ][ 'status' ]     = TRUE; // TRUE | FALSE to disable
  * These are the database settings for production|development.
  * 
  ******************************************************************************/
-$config[ 'db' ][ 'class' ]   = 'RawPHP\\RawDatabase\\Database';
-$config[ 'db' ][ 'db_name' ] = 'db_name';
-$config[ 'db' ][ 'db_user' ] = 'root';
-$config[ 'db' ][ 'db_pass' ] = '';
-$config[ 'db' ][ 'db_host' ] = 'localhost';
+//$config[ 'db' ][ 'class' ]   = 'RawPHP\\RawDatabase\\Database';
+//$config[ 'db' ][ 'db_name' ] = 'db_name';
+//$config[ 'db' ][ 'db_user' ] = 'root';
+//$config[ 'db' ][ 'db_pass' ] = '';
+//$config[ 'db' ][ 'db_host' ] = 'localhost';
 
 
 /*******************************************************************************
@@ -150,11 +147,11 @@ $config[ 'db' ][ 'db_host' ] = 'localhost';
  * These are the database settings for testing.
  * 
  ******************************************************************************/
-$config[ 'test_db' ][ 'class' ]   = 'RawPHP\\RawDatabase\\Database';
-$config[ 'test_db' ][ 'db_name' ] = 'db_name_test';
-$config[ 'test_db' ][ 'db_user' ] = 'root';
-$config[ 'test_db' ][ 'db_pass' ] = '';
-$config[ 'test_db' ][ 'db_host' ] = 'localhost';
+//$config[ 'test_db' ][ 'class' ]   = 'RawPHP\\RawDatabase\\Database';
+//$config[ 'test_db' ][ 'db_name' ] = 'db_name_test';
+//$config[ 'test_db' ][ 'db_user' ] = 'root';
+//$config[ 'test_db' ][ 'db_pass' ] = '';
+//$config[ 'test_db' ][ 'db_host' ] = 'localhost';
 
 
 /*******************************************************************************
@@ -163,15 +160,15 @@ $config[ 'test_db' ][ 'db_host' ] = 'localhost';
  * Mail and SMTP settings used to send emails using SMTP.
  * 
  ******************************************************************************/
-$config[ 'mail' ][ 'from_email' ]   = 'no-reply@example.com';      // default from email to use in emails
-$config[ 'mail' ][ 'from_name' ]    = 'RawPHP';                    // default from name to use in emails
-
-$config[ 'mail' ][ 'smtp' ][ 'auth' ]         = TRUE;              // enable SMTP authentication
-$config[ 'mail' ][ 'smtp' ][ 'host' ]         = 'smtp.gmail.com';  // main and backup SMTP servers
-$config[ 'mail' ][ 'smtp' ][ 'username' ]     = 'username';        // SMTP username
-$config[ 'mail' ][ 'smtp' ][ 'password' ]     = 'password';        // SMTP password
-$config[ 'mail' ][ 'smtp' ][ 'security' ]     = 'ssl';             // Enable TLS encryption, 'ssl' also accepted
-$config[ 'mail' ][ 'smtp' ][ 'port' ]         = '465';             // SMTP port
+//$config[ 'mail' ][ 'from_email' ]   = 'no-reply@example.com';      // default from email to use in emails
+//$config[ 'mail' ][ 'from_name' ]    = 'RawPHP';                    // default from name to use in emails
+//
+//$config[ 'mail' ][ 'smtp' ][ 'auth' ]         = TRUE;              // enable SMTP authentication
+//$config[ 'mail' ][ 'smtp' ][ 'host' ]         = 'smtp.gmail.com';  // main and backup SMTP servers
+//$config[ 'mail' ][ 'smtp' ][ 'username' ]     = 'username';        // SMTP username
+//$config[ 'mail' ][ 'smtp' ][ 'password' ]     = 'password';        // SMTP password
+//$config[ 'mail' ][ 'smtp' ][ 'security' ]     = 'ssl';             // Enable TLS encryption, 'ssl' also accepted
+//$config[ 'mail' ][ 'smtp' ][ 'port' ]         = '465';             // SMTP port
 
 
 return $config;
