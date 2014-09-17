@@ -38,12 +38,7 @@ namespace RawPHP\RawApplication;
 use RawPHP\RawBase\Component;
 use RawPHP\RawSession\Session;
 use RawPHP\RawRequest\Request;
-use RawPHP\RawDatabase\Database;
-use RawPHP\RawErrorHandler\ErrorHandler;
 use RawPHP\RawRouter\Router;
-use RawPHP\RawLog\Log;
-use RawPHP\RawLog\ILog;
-use RawPHP\RawDatabase\IDatabase;
 use RawPHP\RawBase\Exceptions\RawException;
 
 /**
@@ -73,12 +68,9 @@ abstract class Application extends Component
      * @var ISession
      */
     public $session                 = NULL;
-    public $errorHandler            = NULL;
     public $controller              = NULL;
     public $flash                   = array();
     public $language                = 'en_US';
-    
-    public $services                = array();
     
     public $defaultLanguage         = 'en_US';
     protected $defaultController    = 'home';
@@ -102,17 +94,11 @@ abstract class Application extends Component
     {
         $this->doAction( self::ON_BEFORE_APP_INIT_ACTION );
         
-        $this->_initLogger( $config );
-        
-        $this->_initErrorHandler( $config );
-        
         $this->_initRequest( $config );
         
         $this->_initRouter( $config );
         
         $this->_initSession( $config );
-        
-        $this->_initDatabase( $config );
         
         $this->_initAppName( $config );
         
@@ -121,78 +107,6 @@ abstract class Application extends Component
         $this->_initMaintenanceMode( $config );
         
         $this->doAction( self::ON_AFTER_APP_INIT_ACTION );
-    }
-    
-    /**
-     * Initialises the log for the application.
-     * 
-     * @param array $config configuration array
-     */
-    private function _initLogger( $config )
-    {
-        $this->doAction( self::ON_BEFORE_LOG_INIT_ACTION );
-        
-        if ( isset( $config[ 'log' ] ) )
-        {
-            if ( isset( $config[ 'log' ][ 'class' ] ) )
-            {
-                $class = $config[ 'log' ][ 'class' ];
-                
-                $this->log = new $class( );
-                $this->log->init( $config[ 'log' ] );
-                
-                if ( FALSE === $this->log instanceof ILog )
-                {
-                    throw new RawException( 'Log must implement the ILog interface.' );
-                }
-            }
-            else
-            {
-                $this->log = new Log( );
-                $this->log->init( $config[ 'log' ] );
-            }
-        }
-        else
-        {
-            $this->log = new ErrorHandler( );
-        }
-        
-        $this->doAction( self::ON_AFTER_LOG_INIT_ACTION );
-    }
-    
-    /**
-     * Initialises the error handler.
-     * 
-     * @param array $config configuration array
-     * 
-     * @action ON_BEFORE_ERR_HANDLER_INIT_ACTION
-     * @action ON_AFTER_ERR_HANDLER_INIT_ACTION
-     */
-    private function _initErrorHandler( $config )
-    {
-        $this->doAction( self::ON_BEFORE_ERR_HANDLER_INIT_ACTION );
-        
-        if ( isset( $config[ 'error' ] ) )
-        {
-            if ( isset( $config[ 'error' ][ 'class' ] ) )
-            {
-                $class = $config[ 'error' ][ 'class' ];
-                
-                $this->errorHandler = new $class( );
-                $this->errorHandler->init( $config[ 'error' ] );
-            }
-            else
-            {
-                $this->errorHandler = new ErrorHandler( );
-                $this->init( $config[ 'error' ] );
-            }
-        }
-        else
-        {
-            $this->errorHandler = new ErrorHandler( );
-        }
-        
-        $this->doAction( self::ON_AFTER_ERR_HANDLER_INIT_ACTION );
     }
     
     /**
@@ -366,53 +280,6 @@ abstract class Application extends Component
         }
         
         $this->defaultLanguage = $this->filter( self::ON_INIT_DEFAULT_LANG_FILTER, $language );
-    }
-    
-    /**
-     * Initialises the database.
-     * 
-     * @param array $config configuration array
-     * 
-     * @action ON_BEFORE_DATABASE_INIT_ACTION
-     * @action ON_AFTER_DATABSE_INIT_ACTION
-     */
-    private function _initDatabase( $config )
-    {
-        $this->doAction( self::ON_BEFORE_DATABASE_INIT_ACTION );
-        
-        if ( file_exists( TEST_LOCK_FILE ) )
-        {
-            echo PHP_EOL . PHP_EOL . '************* RAW_TESTING *************' . PHP_EOL . PHP_EOL;
-            
-            $dbKey = 'test_db';
-        }
-        else
-        {
-            $dbKey = 'db';
-        }
-        
-        if ( isset( $config[ $dbKey ] ) )
-        {
-            if ( isset( $config[ $dbKey ][ 'class' ] ) )
-            {
-                $class = $config[ $dbKey ][ 'class' ];
-                
-                $this->db = new $class( );
-                $this->db->init( $config[ $dbKey ] );
-                
-                if ( FALSE === $this->db instanceof IDatabase )
-                {
-                    throw new RawException( 'The database class must implement the IDatabase interface.' );
-                }
-            }
-            else
-            {
-                $this->db = new Database( );
-                $this->db->init( $config[ $dbKey ] );
-            }
-        }
-        
-        $this->doAction( self::ON_AFTER_DATABSE_INIT_ACTION );
     }
     
     /**
