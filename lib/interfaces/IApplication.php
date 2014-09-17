@@ -55,6 +55,6 @@ interface IApplication
      * @action ON_BEFORE_APP_INIT_ACTION
      * @action ON_AFTER_APP_INIT_ACTION
      */
-    public function init( $config = array( ) );
+    public function init( $config = NULL );
     
 }

@@ -90,8 +90,10 @@ abstract class Application extends Component
      * @action ON_BEFORE_APP_INIT_ACTION
      * @action ON_AFTER_APP_INIT_ACTION
      */
-    public function init( $config )
+    public function init( $config = NULL )
     {
+        parent::init( $config );
+        
         $this->doAction( self::ON_BEFORE_APP_INIT_ACTION );
         
         $this->_initRequest( $config );
