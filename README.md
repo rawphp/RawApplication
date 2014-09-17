@@ -67,5 +67,8 @@ Please submit bug reports, suggestions and pull requests to the [GitHub issue tr
 
 ## Changelog
 
+#### 17-09-2014
+- Reduced component dependency to just the essentials in composer.
+
 #### 14-09-2014
 - Initial Code Commit
