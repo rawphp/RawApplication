@@ -36,10 +36,13 @@
 namespace RawPHP\RawApplication;
 
 use RawPHP\RawBase\Component;
+use RawPHP\RawSession\ISession;
 use RawPHP\RawSession\Session;
+use RawPHP\RawRequest\IRequest;
 use RawPHP\RawRequest\Request;
+use RawPHP\RawRouter\IRouter;
 use RawPHP\RawRouter\Router;
-use RawPHP\RawBase\Exceptions\RawException;
+
 
 /**
  * This is a base class for an application.
@@ -56,13 +59,21 @@ use RawPHP\RawBase\Exceptions\RawException;
  */
 abstract class Application extends Component
 {
+    /**
+     * @var string
+     */
     public $appName                 = 'Application';
     /**
      * @var IDatabase
      */
     public $db                      = NULL;
-    public $log                     = NULL;
+    /**
+     * @var IRequest
+     */
     public $request                 = NULL;
+    /**
+     * @var IRouter
+     */
     public $router                  = NULL;
     /**
      * @var ISession
@@ -515,12 +526,6 @@ abstract class Application extends Component
     const ON_BEFORE_APP_INIT_ACTION             = 'on_before_app_init_action';
     const ON_AFTER_APP_INIT_ACTION              = 'on_after_app_init_action';
     
-    const ON_BEFORE_LOG_INIT_ACTION             = 'on_before_log_init_action';
-    const ON_AFTER_LOG_INIT_ACTION              = 'on_after_log_init_action';
-    
-    const ON_BEFORE_ERR_HANDLER_INIT_ACTION     = 'on_before_err_handler_init_action';
-    const ON_AFTER_ERR_HANDLER_INIT_ACTION      = 'on_after_err_handler_init_action';
-    
     const ON_BEFORE_REQUEST_INIT_ACTION         = 'on_before_request_init_action';
     const ON_AFTER_REQUEST_INIT_ACTION          = 'on_after_request_init_action';
     
@@ -529,9 +534,6 @@ abstract class Application extends Component
     
     const ON_BEFORE_SESSION_INIT_ACTION         = 'on_before_session_init_action';
     const ON_AFTER_SESSION_INIT_ACTION          = 'on_after_session_init_action';
-    
-    const ON_BEFORE_DATABASE_INIT_ACTION        = 'on_before_database_init_action';
-    const ON_AFTER_DATABSE_INIT_ACTION          = 'on_after_database_init_action';
     
     const ON_MAINTENANCE_MODE_ACTION            = 'maintenance_mode_action';
     const ON_BEFORE_MAINTAINT_MODE_ACTION       = 'on_before_maintain_mode_action';

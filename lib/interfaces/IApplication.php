@@ -57,4 +57,66 @@ interface IApplication
      */
     public function init( $config = NULL );
     
+    /**
+     * Initialises the application request process.
+     * 
+     * @action ON_BEFORE_RUN_ACTION
+     * @action ON_AFTER_RUN_ACTION
+     */
+    public function run();
+    
+    /**
+     * Creates a new url.
+     * 
+     * @param string $route    controller/method route
+     * @param array  $params   list of parameters
+     * @param bool   $absolute whether it should be an absolute url
+     * 
+     * @return string the url
+     */
+    public function createUrl( $route, $params = array(), $absolute = FALSE );
+    
+    /**
+     * Adds a flash message to appear on the next page.
+     * 
+     * Error   => 'error' ( default )
+     * Success => 'success'
+     * 
+     * @param string $message success or error message
+     * @param string $type    the type of message
+     */
+    public function addFlash( $message, $type = 'error' );
+    
+    /**
+     * Returns a list of error flash messages.
+     * 
+     * @filter ON_GET_ERRORS_FILTER
+     * 
+     * @return array list of error messages
+     */
+    public function getErrors( );
+    
+    /**
+     * Returns a list of success flash messages.
+     * 
+     * @filter ON_GET_MESSAGES_FILTER
+     * 
+     * @return array list of success messages
+     */
+    public function getMessages( );
+    
+    /**
+     * This function outputs caught errors and exceptions.
+     * 
+     * This method can be overriden in a subclass to change the
+     * error output format.
+     * 
+     * @param array $error the error array
+     */
+    public static function displayError( $error );
+    
+    /**
+     * Removes old flash messages.
+     */
+    public function cleanFlash( );
 }
