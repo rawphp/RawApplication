@@ -152,6 +152,7 @@ abstract class Application extends Component
         else
         {
             $this->request = new Request( );
+            $this->request->init( );
         }
         
         $this->doAction( self::ON_AFTER_REQUEST_INIT_ACTION );
