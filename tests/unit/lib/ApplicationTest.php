@@ -165,7 +165,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         global $config;
         
-        $this->assertEquals( $config[ 'application_name' ], $this->app->appName );
+        $this->assertEquals( $config[ 'app' ][ 'name' ], $this->app->appName );
     }
     
     /**

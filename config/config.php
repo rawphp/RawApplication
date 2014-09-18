@@ -33,17 +33,21 @@
  * @link      http://rawphp.org/
  */
 
+
+defined( 'DEBUG' )          || define( 'DEBUG', FALSE );
+
 $config = array();
 
 /*******************************************************************************
  * Application
  * -----------------------------------------------------------------------------
- * This is the class that will be instantiated when running the application.
+ * Application settings.
  * 
  ******************************************************************************/
-$config[ 'app_class' ] = 'RawPHP\RawApplication\Tests\\TestApp';
-
-$config[ 'application_name' ] = 'Test RawPHP App';
+$config[ 'app' ][ 'class' ]             = 'RawPHP\RawApplication\Tests\\TestApp';
+$config[ 'app' ][ 'name' ]              = 'Test RawPHP App';  // applicaton name
+$config[ 'app' ][ 'default_language' ]  = 'en_US';            // the default language
+$config[ 'app' ][ 'debug' ]             = DEBUG;
 
 
 /*******************************************************************************
@@ -54,13 +58,14 @@ $config[ 'application_name' ] = 'Test RawPHP App';
  ******************************************************************************/
 
 //use RawPHP\RawLog\Log;
-
+//
 //$config[ 'log' ][ 'class' ]          = 'RawPHP\\RawLog\\Log';
 //$config[ 'log' ][ 'log_file' ]       = OUTPUT_DIR . 'log.txt';
 //$config[ 'log' ][ 'log_name' ]       = 'test-log';
 //$config[ 'log' ][ 'log_type' ][]     = Log::HANDLER_STANDARD_LOG;
 //$config[ 'log' ][ 'log_type' ][]     = Log::HANDLER_ROTATE_LOG;
 //$config[ 'log' ][ 'log_type' ][]     = Log::HANDLER_RAW_MAIL;
+//$config[ 'log' ][ 'debug' ]          = DEBUG;
 
 
 /*******************************************************************************
@@ -72,7 +77,8 @@ $config[ 'application_name' ] = 'Test RawPHP App';
 //$config[ 'error' ][ 'class' ]              = 'RawPHP\\RawErrorHandler\\ErrorHandler';
 //$config[ 'error' ][ 'error_callback' ]     = array( 'RawPHP\\RawApplication\\Application', 'displayError' );
 //$config[ 'error' ][ 'exception_callback' ] = array( 'RawPHP\\RawApplication\\', 'displayError' );
-//$config[ 'error_handler' ][ 'shutdown_callback' ]
+//$config[ 'error' ][ 'shutdown_callback' ]
+//$config[ 'error' ][ 'debug' ]              = DEBUG;
 
 
 /*******************************************************************************
@@ -82,6 +88,7 @@ $config[ 'application_name' ] = 'Test RawPHP App';
  * 
  ******************************************************************************/
 $config[ 'request' ][ 'class' ]         = 'RawPHP\\RawRequest\\Request';
+$config[ 'request' ][ 'debug' ]         = DEBUG;
 // there are no special configuration settings required
 
 
@@ -95,6 +102,7 @@ $config[ 'router' ][ 'class' ]              = 'RawPHP\\RawRouter\\Router';
 $config[ 'router' ][ 'default_controller' ] = 'home';
 $config[ 'router' ][ 'default_action' ]     = 'index';
 $config[ 'router' ][ 'namespace' ]          = 'RawPHP\\RawApplication\\';
+$config[ 'router' ][ 'debug' ]              = DEBUG;
 
 
 /*******************************************************************************
@@ -108,6 +116,7 @@ $config[ 'session' ][ 'auto_start' ]    = FALSE;
 $config[ 'session' ][ 'strict' ]        = TRUE; // force InvalidSessionException if session problems
 //$config[ 'session' ][ 'session_id' ]    = '';
 //$config[ 'session' ][ 'session_path' ]  = '';
+$config[ 'session' ][ 'debug' ]         = DEBUG;
 
 
 /*******************************************************************************
@@ -126,6 +135,7 @@ $config[ 'maintenance' ][ 'control' ]    = 'config'; // config | app
 $config[ 'maintenance' ][ 'controller' ] = 'home';
 $config[ 'maintenance' ][ 'action' ]     = 'maintain';
 $config[ 'maintenance' ][ 'status' ]     = TRUE; // TRUE | FALSE to disable
+$config[ 'maintenance' ][ 'debug' ]      = DEBUG;
 
 
 /*******************************************************************************
@@ -139,6 +149,7 @@ $config[ 'maintenance' ][ 'status' ]     = TRUE; // TRUE | FALSE to disable
 //$config[ 'db' ][ 'db_user' ] = 'root';
 //$config[ 'db' ][ 'db_pass' ] = '';
 //$config[ 'db' ][ 'db_host' ] = 'localhost';
+//$config[ 'db' ][ 'debug' ]   = DEBUG;
 
 
 /*******************************************************************************
@@ -152,6 +163,7 @@ $config[ 'maintenance' ][ 'status' ]     = TRUE; // TRUE | FALSE to disable
 //$config[ 'test_db' ][ 'db_user' ] = 'root';
 //$config[ 'test_db' ][ 'db_pass' ] = '';
 //$config[ 'test_db' ][ 'db_host' ] = 'localhost';
+//$config[ 'test_db' ][ 'debug' ]   = DEBUG;
 
 
 /*******************************************************************************
@@ -169,6 +181,7 @@ $config[ 'maintenance' ][ 'status' ]     = TRUE; // TRUE | FALSE to disable
 //$config[ 'mail' ][ 'smtp' ][ 'password' ]     = 'password';        // SMTP password
 //$config[ 'mail' ][ 'smtp' ][ 'security' ]     = 'ssl';             // Enable TLS encryption, 'ssl' also accepted
 //$config[ 'mail' ][ 'smtp' ][ 'port' ]         = '465';             // SMTP port
+//$config[ 'mail' ][ 'debug' ]                  = DEBUG;
 
 
 return $config;

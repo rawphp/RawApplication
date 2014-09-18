@@ -67,6 +67,10 @@ Please submit bug reports, suggestions and pull requests to the [GitHub issue tr
 
 ## Changelog
 
+#### 19-09-2014
+- Updated application configuration
+- Added debug flag for application components in config.
+
 #### 18-09-2014
 - Updated to work with the latest rawphp/rawbase package.
 

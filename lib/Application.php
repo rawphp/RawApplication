@@ -268,9 +268,9 @@ abstract class Application extends Component
     {
         $appName = 'Application';
         
-        if ( isset( $config[ 'application_name' ] ) )
+        if ( isset( $config[ 'app' ][ 'name' ] ) )
         {
-            $appName = $config[ 'application_name' ];
+            $appName = $config[ 'app' ][ 'name' ];
         }
         
         $this->appName = $this->filter( self::ON_INIT_APP_NAME_FILTER, $appName );
