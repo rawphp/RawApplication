@@ -33,7 +33,10 @@
  * @link      http://rawphp.org/
  */
 
+use RawPHP\RawYaml\Yaml;
+
 defined( 'DS' )             || define( 'DS', DIRECTORY_SEPARATOR );
+
 defined( 'BASE_URL' )       || define( 'BASE_URL', 'http://rawphp' );
 defined( 'SUPPORT_DIR' )    || define( 'SUPPORT_DIR', dirname( __FILE__ ) . DS . '_support' . DS );
 defined( 'OUTPUT_DIR' )     || define( 'OUTPUT_DIR', dirname( __FILE__ ) . DS . '_output' . DS );
@@ -42,8 +45,28 @@ defined( 'TEST_LOCK_FILE' ) || define( 'TEST_LOCK_FILE', 'test.lock' );
 
 require_once dirname( dirname( __FILE__ ) ) . DS . 'vendor' . DS . 'autoload.php';
 
-$config = include_once SUPPORT_DIR . 'config.php';
+$config = ( new Yaml( ) )->load( SUPPORT_DIR . 'config.yml' );
+$config[ 'log' ][ 'log_file' ] = fixPath( $config[ 'log' ][ 'log_file' ] );
 
 require_once SUPPORT_DIR . 'TestApp.php';
 
 echo PHP_EOL . PHP_EOL . '************* BOOTSTRAP ********************' . PHP_EOL . PHP_EOL;
+
+
+/**
+ * Helper function to cleanup migration path in configuration.
+ * 
+ * @param string $path migration path
+ * 
+ * @return string migration path
+ */
+function fixPath( $path )
+{
+    // fix path
+    if ( FALSE !== strstr( $path, '%OUTPUT_DIR%' ) )
+    {
+        $path = str_replace( '%OUTPUT_DIR%', OUTPUT_DIR, $path );
+    }
+    
+    return $path;
+}

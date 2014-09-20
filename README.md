@@ -67,6 +67,9 @@ Please submit bug reports, suggestions and pull requests to the [GitHub issue tr
 
 ## Changelog
 
+#### 20-09-2014
+- Replaced php array configuration with yaml
+
 #### 19-09-2014
 - Updated application configuration
 - Added debug flag for application components in config.
