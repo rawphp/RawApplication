@@ -191,6 +191,7 @@ abstract class Application extends Component
         else
         {
             $this->router = new Router( );
+            $this->router->init( );
         }
         
         $controller = $this->router->defaultController;
@@ -235,6 +236,7 @@ abstract class Application extends Component
         else
         {
             $this->session = new Session( );
+            $this->session->init( );
         }
         
         // get flash key
@@ -353,7 +355,7 @@ abstract class Application extends Component
      * @action ON_BEFORE_RUN_ACTION
      * @action ON_AFTER_RUN_ACTION
      */
-    public function run()
+    public function run( )
     {
         $this->doAction( self::ON_BEFORE_RUN_ACTION );
         
@@ -370,7 +372,7 @@ abstract class Application extends Component
      * 
      * @throws Exception
      */
-    protected function processRequest()
+    protected function processRequest( )
     {
         $this->doAction( self::ON_BEFORE_PROCESS_REQUEST_ACTION );
         
