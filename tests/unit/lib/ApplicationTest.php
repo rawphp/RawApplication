@@ -152,8 +152,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull( $this->app->session );
         
         $this->assertEquals( $config[ 'session' ][ 'class' ], get_class( $this->app->session ) );
-        
-        $this->assertEquals( Session::STATUS_NONE, $this->app->session->getStatus( ) );
     }
     
     /**
