@@ -1,4 +1,6 @@
-# RawApplication - A Simple App Class for PHP Applications [![Build Status](https://travis-ci.org/rawphp/RawApplication.svg?branch=master)](https://travis-ci.org/rawphp/RawApplication)
+# RawApplication - A Simple App Class for PHP Applications
+
+[![Build Status](https://travis-ci.org/rawphp/RawApplication.svg?branch=master)](https://travis-ci.org/rawphp/RawApplication)
 
 [![Latest Stable Version](https://poser.pugx.org/rawphp/raw-application/v/stable.svg)](https://packagist.org/packages/rawphp/raw-application) [![Total Downloads](https://poser.pugx.org/rawphp/raw-application/downloads.svg)](https://packagist.org/packages/rawphp/raw-application) [![Latest Unstable Version](https://poser.pugx.org/rawphp/raw-application/v/unstable.svg)](https://packagist.org/packages/rawphp/raw-application) [![License](https://poser.pugx.org/rawphp/raw-application/license.svg)](https://packagist.org/packages/rawphp/raw-application)
 
@@ -66,6 +68,9 @@ This package is licensed under the [MIT](https://github.com/rawphp/RawApplicatio
 Please submit bug reports, suggestions and pull requests to the [GitHub issue tracker](https://github.com/rawphp/RawApplication/issues).
 
 ## Changelog
+
+#### 22-09-2014
+- Updated to PHP 5.3.
 
 #### 20-09-2014
 - Replaced php array configuration with yaml

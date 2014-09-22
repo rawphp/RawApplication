@@ -23,7 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * 
- * PHP version 5.4
+ * PHP version 5.3
  * 
  * @category  PHP
  * @package   RawPHP/RawApplication
@@ -45,7 +45,8 @@ defined( 'TEST_LOCK_FILE' ) || define( 'TEST_LOCK_FILE', 'test.lock' );
 
 require_once dirname( dirname( __FILE__ ) ) . DS . 'vendor' . DS . 'autoload.php';
 
-$config = ( new Yaml( ) )->load( SUPPORT_DIR . 'config.yml' );
+$yaml = new Yaml( );
+$config = $yaml->load( SUPPORT_DIR . 'config.yml' );
 $config[ 'log' ][ 'log_file' ] = fixPath( $config[ 'log' ][ 'log_file' ] );
 
 require_once SUPPORT_DIR . 'TestApp.php';

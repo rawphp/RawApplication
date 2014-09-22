@@ -23,6 +23,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * 
+ * PHP version 5.3
+ * 
  * @category  PHP
  * @package   RawPHP/RawApplication/Tests
  * @author    Tom Kaczohca <tom@rawphp.org>
