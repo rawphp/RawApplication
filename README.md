@@ -1,6 +1,6 @@
 # RawApplication - A Simple App Class for PHP Applications
 
-[![Build Status](https://travis-ci.org/rawphp/RawApplication.svg?branch=master)](https://travis-ci.org/rawphp/RawApplication)
+[![Build Status](https://travis-ci.org/rawphp/RawApplication.svg?branch=master)](https://travis-ci.org/rawphp/RawApplication) [![Coverage Status](https://coveralls.io/repos/rawphp/RawApplication/badge.png?branch=master)](https://coveralls.io/r/rawphp/RawApplication?branch=master)
 
 [![Latest Stable Version](https://poser.pugx.org/rawphp/raw-application/v/stable.svg)](https://packagist.org/packages/rawphp/raw-application) [![Total Downloads](https://poser.pugx.org/rawphp/raw-application/downloads.svg)](https://packagist.org/packages/rawphp/raw-application) [![Latest Unstable Version](https://poser.pugx.org/rawphp/raw-application/v/unstable.svg)](https://packagist.org/packages/rawphp/raw-application) [![License](https://poser.pugx.org/rawphp/raw-application/license.svg)](https://packagist.org/packages/rawphp/raw-application)
 
