@@ -36,7 +36,6 @@
 namespace RawPHP\RawApplication;
 
 use RawPHP\RawApplication\Tests\TestApp;
-use RawPHP\RawSession\Session;
 
 /**
  * The application tests.
