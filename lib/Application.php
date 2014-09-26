@@ -42,6 +42,8 @@ use RawPHP\RawRequest\IRequest;
 use RawPHP\RawRequest\Request;
 use RawPHP\RawRouter\IRouter;
 use RawPHP\RawRouter\Router;
+use RawPHP\RawGuard\IGuardian;
+use RawPHP\RawGuard\Guardian;
 
 
 /**
@@ -75,6 +77,10 @@ abstract class Application extends Component
      * @var IRouter
      */
     public $router                  = NULL;
+    /**
+     * @var IGuardian
+     */
+    public $guard                   = NULL;
     /**
      * @var ISession
      */
@@ -110,6 +116,8 @@ abstract class Application extends Component
         $this->_initRequest( $config );
         
         $this->_initRouter( $config );
+        
+        $this->_initGuardian( $config );
         
         $this->_initSession( $config );
         
@@ -204,6 +212,39 @@ abstract class Application extends Component
                 self::ON_INIT_DEF_ACTION_FILTER, $action );
         
         $this->doAction( self::ON_AFTER_ROUTER_INIT_ACTION );
+    }
+    
+    /**
+     * Initialises the application guardian.
+     * 
+     * @param array $config configuration array
+     */
+    private function _initGuardian( $config )
+    {
+        $this->doAction( self::ON_BEFORE_GUARDIAN_INIT_ACTION );
+        
+        if ( isset( $config[ 'guard' ] ) )
+        {
+            if ( isset( $config[ 'guard' ][ 'class' ] ) )
+            {
+                $class = $config[ 'guard' ][ 'class' ];
+                
+                $this->guard = new $class( );
+                $this->guard->init( $config[ 'guard' ] );
+            }
+            else
+            {
+                $this->guard = new Guardian( );
+                $this->guard->init( $config[ 'guard' ] );
+            }
+        }
+        else
+        {
+            $this->guard = new Guardian( );
+            $this->guard->init( array( ) );
+        }
+        
+        $this->doAction( self::ON_AFTER_GUARDIAN_INIT_ACTION );
     }
     
     /**
@@ -534,6 +575,9 @@ abstract class Application extends Component
     
     const ON_BEFORE_ROUTER_INIT_ACTION          = 'on_before_router_init_action';
     const ON_AFTER_ROUTER_INIT_ACTION           = 'on_after_router_init_action';
+    
+    const ON_BEFORE_GUARDIAN_INIT_ACTION        = 'on_before_guardian_init_action';
+    const ON_AFTER_GUARDIAN_INIT_ACTION         = 'on_after_guardian_init_action';
     
     const ON_BEFORE_SESSION_INIT_ACTION         = 'on_before_session_init_action';
     const ON_AFTER_SESSION_INIT_ACTION          = 'on_after_session_init_action';

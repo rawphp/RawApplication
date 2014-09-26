@@ -17,6 +17,7 @@
         "rawphp/raw-request": "0.*@dev",
         "rawphp/raw-router": "0.*@dev",
         "rawphp/raw-session": "0.*@dev",
+        "rawphp/raw-guard": "0.*@dev",
         "rawphp/raw-yaml": "1.0.0-RC-2"
     },
     "require-dev": {

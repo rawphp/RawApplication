@@ -108,6 +108,46 @@ router:
 
 
 ################################################################################
+# Guard
+# ------------------------------------------------------------------------------
+# These are the Guard settings for the application.
+#
+################################################################################ 
+
+guard:
+    debug:                          FALSE
+    class:                          RawPHP\RawGuard\Guardian
+    use_hierarchy:                  TRUE
+    roles:
+        - admin:
+            - manage_network
+            - manage_sites
+            - manage_users
+        - editor:
+            - activate_plugins
+            - create_users
+            - delete_plugins
+            - delete_themes
+            - delete_users
+            - edit_files
+            - edit_plugins
+            - edit_themes
+            - edit_users
+            - export
+            - import
+        - author:
+            - install_plugins
+            - install_themes
+            - list_users
+            - manage_options
+        - contributor:
+            - edit_posts
+            - delete_posts
+        - subscriber:
+            - read
+
+
+################################################################################
 # Session
 # ------------------------------------------------------------------------------
 # Session settings.

@@ -140,6 +140,20 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test guardian setup correctly.
+     */
+    public function testGuardianSet( )
+    {
+        $this->assertNotNull( $this->app->guard );
+        $this->assertTrue( $this->app->guard->useHierarchy );
+        
+        $this->assertEquals( 5, count( $this->app->guard->roles ) );
+        
+        $this->assertEquals( 'admin', $this->app->guard->roles[ 0 ]->getName( ) );
+        $this->assertEquals( 21, count( $this->app->guard->roles[ 0 ]->getCaps( ) ) );
+    }
+    
+    /**
      * Test session setup correctly.
      * 
      * @global array $config configuration array
