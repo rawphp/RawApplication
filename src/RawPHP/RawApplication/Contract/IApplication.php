@@ -23,23 +23,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * 
- * PHP version 5.3
+ * PHP version 5.4
  * 
  * @category  PHP
- * @package   RawPHP/RawApplication
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawApplication\Contract
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
 
-namespace RawPHP\RawApplication;
+namespace RawPHP\RawApplication\Contract;
 
 /**
  * The application interface.
  * 
  * @category  PHP
- * @package   RawPHP/Core
+ * @package   RawPHP\RawApplication\Contract
  * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT

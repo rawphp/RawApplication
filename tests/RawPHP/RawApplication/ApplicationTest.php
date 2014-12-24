@@ -2,19 +2,19 @@
 
 /**
  * This file is part of RawPHP - a PHP Framework.
- * 
+ *
  * Copyright (c) 2014 RawPHP.org
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,84 +22,92 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- * 
- * PHP version 5.3
- * 
+ *
+ * PHP version 5.4
+ *
  * @category  PHP
- * @package   RawPHP/RawApplication/Tests
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawApplication\Tests
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
 
-namespace RawPHP\RawApplication;
+namespace RawPHP\RawApplication\Tests;
 
-use RawPHP\RawApplication\Tests\TestApp;
+use PHPUnit_Framework_TestCase;
+use RawPHP\RawApplication\Contract\IApplication;
+use RawPHP\RawApplication\Support\TestApp;
 
 /**
  * The application tests.
- * 
+ *
  * @category  PHP
- * @package   RawPHP/RawApplication/Tests
+ * @package   RawPHP\RawApplication\Tests
  * @author    Tom Kaczohca <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
-class ApplicationTest extends \PHPUnit_Framework_TestCase
+class ApplicationTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var Application
-     */
+    /** @var  IApplication */
     protected $app;
-    
+    /** @var  array */
+    protected static $config;
+
     /**
      * Setup before test suite run.
      */
     public static function setUpBeforeClass()
     {
+        global $config;
+
         parent::setUpBeforeClass();
-        
+
+        self::$config = $config;
+
         touch( TEST_LOCK_FILE );
     }
-    
+
     /**
      * Cleanup after test suite run.
      */
     public static function tearDownAfterClass()
     {
         parent::tearDownAfterClass();
-        
+
         if ( file_exists( TEST_LOCK_FILE ) )
         {
             unlink( TEST_LOCK_FILE );
         }
     }
-    
+
     /**
      * Setup before each test.
-     * 
-     * @global type $config
+     *
+     * @global array $config
      */
     protected function setUp()
     {
-        global $config;
-        
-        $this->app = new TestApp( );
-        $this->app->init( $config );
+        $this->app = new TestApp( self::$config );
     }
-    
+
     /**
      * Cleanup after each test.
      */
     protected function tearDown()
     {
-        $this->app->flash[ 'errors' ]  = array();
-        $this->app->flash[ 'success' ] = array();
+        $this->app->setFlash( [ 'success' => [ ], 'errors' => [ ] ] );
+
+        if ( file_exists( OUTPUT_DIR . 'session.json' ) )
+        {
+            unlink( OUTPUT_DIR . 'session.json' );
+        }
+
         $this->app = NULL;
     }
-    
+
     /**
      * Test application instantiated correctly.
      */
@@ -107,159 +115,138 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNotNull( $this->app );
     }
-    
+
     /**
      * Test request setup correctly.
-     * 
-     * @global array $config configuration array
+     *
+     * @global array self::$config configuration array
      */
-    public function testRequestSet( )
+    public function testRequestSet()
     {
-        global $config;
-        
-        $this->assertNotNull( $this->app->request );
-        
-        $this->assertEquals( $config[ 'request' ][ 'class' ], get_class( $this->app->request ) );
+        $this->assertNotNull( $this->app[ 'request' ] );
+
+        $this->assertEquals( self::$config[ 'request' ][ 'class' ], get_class( $this->app[ 'request' ] ) );
     }
-    
+
     /**
      * Test router setup correctly.
-     * 
-     * @global array $config configuration array
+     *
+     * @global array self::$config configuration array
      */
-    public function testRouterSet( )
+    public function testRouterSet()
     {
-        global $config;
-        
-        $this->assertNotNull( $this->app->router );
-        
-        $this->assertEquals( $config[ 'router' ][ 'class' ], get_class( $this->app->router ) );
-        $this->assertEquals( $config[ 'router' ][ 'default_controller' ], $this->app->router->defaultController );
-        $this->assertEquals( $config[ 'router' ][ 'default_action' ], $this->app->router->defaultAction );
-        $this->assertEquals( $config[ 'router' ][ 'namespace' ], $this->app->router->namespace );
+        $this->assertNotNull( $this->app[ 'router' ] );
+
+        $this->assertEquals( self::$config[ 'router' ][ 'class' ], get_class( $this->app[ 'router' ] ) );
+        $this->assertEquals( self::$config[ 'router' ][ 'default_controller' ], $this->app[ 'router' ]->getDefaultController() );
+        $this->assertEquals( self::$config[ 'router' ][ 'default_action' ], $this->app[ 'router' ]->getDefaultAction() );
+        $this->assertCount( 1, $this->app[ 'router' ]->getNamespaces() );
     }
-    
-    /**
-     * Test guardian setup correctly.
-     */
-    public function testGuardianSet( )
-    {
-        $this->assertNotNull( $this->app->guard );
-        $this->assertTrue( $this->app->guard->useHierarchy );
-        
-        $this->assertEquals( 5, count( $this->app->guard->roles ) );
-        
-        $this->assertEquals( 'admin', $this->app->guard->roles[ 0 ]->getName( ) );
-        $this->assertEquals( 21, count( $this->app->guard->roles[ 0 ]->getCaps( ) ) );
-    }
-    
+
     /**
      * Test session setup correctly.
-     * 
-     * @global array $config configuration array
+     *
+     * @global array self::$config configuration array
      */
-    public function testSessionSet( )
+    public function testSessionSet()
     {
-        global $config;
-        
-        $this->assertNotNull( $this->app->session );
-        
-        $this->assertEquals( $config[ 'session' ][ 'class' ], get_class( $this->app->session ) );
+        $this->assertNotNull( $this->app[ 'session' ] );
+
+        $this->assertEquals( self::$config[ 'session' ][ 'class' ], get_class( $this->app[ 'session' ] ) );
+        $this->assertInstanceOf( 'RawPHP\RawSession\Handler\FileHandler', $this->app[ 'session' ]->getHandler() );
     }
-    
+
     /**
      * Test application name set.
-     * 
-     * @global array $config configuration array
+     *
+     * @global array self::$config configuration array
      */
-    public function testApplicationNameSet( )
+    public function testApplicationNameSet()
     {
-        global $config;
-        
-        $this->assertEquals( $config[ 'app' ][ 'name' ], $this->app->appName );
+        $this->assertEquals( self::$config[ 'app' ][ 'name' ], $this->app->getAppName() );
     }
-    
+
     /**
      * Test create url.
      */
     public function testCreateUrl()
     {
-        $route = 'home';
+        $route    = 'home';
         $expected = 'home';
-        
+
         $result = $this->app->createUrl( $route );
-        
+
         $this->assertEquals( $expected, $result );
     }
-    
+
     /**
      * Test create absolute url.
      */
-    public function testCreateAbsoluteUrl( )
+    public function testCreateAbsoluteUrl()
     {
-        $route = 'home';
+        $route    = 'home';
         $expected = BASE_URL . 'home';
-        
+
         $result = $this->app->createUrl( $route, NULL, TRUE );
-        
+
         $this->assertEquals( $expected, $result );
     }
-    
+
     /**
      * Test add flash error.
      */
     public function testAddFlashError()
     {
         $flash = 'Failed to do something interesting';
-        
+
         $this->app->addFlash( $flash );
-        
-        $this->assertEquals( 1, count( $this->app->flash[ 'errors' ] ) );
-        
-        $this->assertEquals( $flash, $this->app->flash[ 'errors' ][ 0 ] );
+
+        $this->assertEquals( 1, count( $this->app->getErrors() ) );
+
+        $this->assertEquals( $flash, $this->app->getErrors()[ 0 ] );
     }
-    
+
     /**
      * Test add flash success message.
      */
     public function testAddFlashMessage()
     {
         $flash = 'That interesting thing we were waiting for, happened!';
-        
+
         $this->app->addFlash( $flash, 'success' );
-        
-        $this->assertEquals( 1, count( $this->app->flash[ 'success' ] ) );
-        
-        $this->assertEquals( $flash, $this->app->flash[ 'success' ][ 0 ] );
+
+        $this->assertEquals( 1, count( $this->app->getFlash()[ 'success' ] ) );
+
+        $this->assertEquals( $flash, $this->app->getFlash()[ 'success' ][ 0 ] );
     }
-    
+
     /**
      * Test get flash errors.
      */
     public function testGetErrors()
     {
         $this->assertEquals( 0, count( $this->app->getErrors() ) );
-        
+
         $this->app->addFlash( 'Problem 1' );
         $this->app->addFlash( 'Problem 2' );
-        
+
         $errors = $this->app->getErrors();
-        
+
         $this->assertEquals( 2, count( $errors ) );
     }
-    
+
     /**
      * Test get flash success messages.
      */
     public function testGetMessages()
     {
         $this->assertEquals( 0, count( $this->app->getMessages() ) );
-        
+
         $this->app->addFlash( 'Success 1', 'success' );
         $this->app->addFlash( 'Success 2', 'success' );
-        
+
         $messages = $this->app->getMessages();
-        
+
         $this->assertEquals( 2, count( $messages ) );
     }
 }
