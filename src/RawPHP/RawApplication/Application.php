@@ -37,6 +37,8 @@ namespace RawPHP\RawApplication;
 
 use RawPHP\RawApplication\Contract\IApplication;
 use RawPHP\RawContainer\Container;
+use RawPHP\RawDispatcher\Dispatcher;
+use RawPHP\RawFileSystem\FileSystem;
 use RawPHP\RawRequest\Request;
 use RawPHP\RawRouter\Contract\IController;
 use RawPHP\RawRouter\Router;
@@ -94,6 +96,8 @@ abstract class Application extends Container implements IApplication
      */
     public function init( $config = [ ] )
     {
+        $this->initDefaults();
+
         $this->initRequest( $config );
 
         $this->initRouter( $config );
@@ -115,6 +119,27 @@ abstract class Application extends Container implements IApplication
     public function getAppName()
     {
         return $this->appName;
+    }
+
+    /**
+     * Initialise default services.
+     */
+    protected function initDefaults()
+    {
+        $this->bindShared( 'RawPHP\RawDispatcher\Contract\IDispatcher', function ()
+        {
+            return new Dispatcher();
+        }
+        );
+
+        $this->bindShared( 'RawPHP\RawFileSystem\Contract\IFileSystem', function ()
+        {
+            return new FileSystem();
+        }
+        );
+
+        $this->alias( 'RawPHP\RawDispatcher\Contract\IDispatcher', 'dispatcher' );
+        $this->alias( 'RawPHP\RawFileSystem\Contract\IFileSystem', 'files' );
     }
 
     /**
@@ -205,6 +230,8 @@ abstract class Application extends Container implements IApplication
 
         $this->alias( 'RawPHP\RawRouter\Contract\IRouter', 'RawPHP\RawRouter\Router' );
         $this->alias( 'RawPHP\RawRouter\Contract\IRouter', 'router' );
+
+        $this[ 'router' ]->setDispatcher( $this[ 'dispatcher' ] );
 
         $this->defaultController = $this[ 'router' ]->getDefaultController();
         $this->defaultAction     = $this[ 'router' ]->getDefaultAction();
