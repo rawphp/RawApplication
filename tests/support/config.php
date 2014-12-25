@@ -27,10 +27,58 @@ return
 
         'log'     =>
             [
-                'debug'    => FALSE,
                 'class'    => 'RawPHP\\RawLog\\Log',
-                'log_file' => '',
-                'log_name' => 'test - log',
+                'debug'    => FALSE,
+                'handlers' =>
+                    [
+                        'standard_log' =>
+                            [
+                                'class'     => 'RawPHP\\RawLog\\Handler\\FileHandler',
+                                'file'      => 'log.txt',
+                                'formatter' => 'RawPHP\\RawLog\\Formatter\\ErrorLogFormatter',
+                                'level'     => 0,
+                            ],
+                        'rotate_log'   =>
+                            [
+                                'class'     => 'RawPHP\\RawLog\\Handler\\RotatingFileHandler',
+                                'file'      => 'rotate.txt',
+                                'formatter' => 'RawPHP\\RawLog\\Formatter\\ErrorLogFormatter',
+                                'level'     => 2,
+                            ],
+                        'mail'         =>
+                            [
+                                'class'     => 'RawPHP\\RawLog\\Handler\\MailHandler',
+                                'formatter' => 'RawPHP\\RawLog\\Formatter\\MailLogFormatter',
+                                'level'     => 4,
+                            ],
+
+                    ],
+            ],
+
+        ################################################################################
+        # Mail
+        # ------------------------------------------------------------------------------
+        # Mail settings.
+        #
+        ################################################################################
+
+        'mail'    =>
+            [
+                'from_email' => 'no-reply@rawphp.org',
+                'from_name'  => 'RawPHP',
+                'to_address' => 'test@example.com',
+                'to_name'    => 'RawPHP',
+                'subject'    => 'RawPHP Error Log Message',
+
+                'smtp'       =>
+                    [
+                        'auth'     => TRUE,
+                        'host'     => 'smtp.gmail.com',
+                        'username' => 'username',
+                        'password' => 'password',
+                        'security' => 'ssl',
+                        'port'     => 465,
+                    ],
             ],
 
         ################################################################################

@@ -39,6 +39,8 @@ use RawPHP\RawApplication\Contract\IApplication;
 use RawPHP\RawContainer\Container;
 use RawPHP\RawDispatcher\Dispatcher;
 use RawPHP\RawFileSystem\FileSystem;
+use RawPHP\RawLog\Log;
+use RawPHP\RawMail\Mail;
 use RawPHP\RawRequest\Request;
 use RawPHP\RawRouter\Contract\IController;
 use RawPHP\RawRouter\Router;
@@ -98,6 +100,10 @@ abstract class Application extends Container implements IApplication
     {
         $this->initDefaults();
 
+        $this->initMail( $config );
+
+        $this->initLog( $config );
+
         $this->initRequest( $config );
 
         $this->initRouter( $config );
@@ -143,6 +149,86 @@ abstract class Application extends Container implements IApplication
     }
 
     /**
+     * Initialise the mail service.
+     *
+     * @param array $config
+     */
+    protected function initMail( array $config )
+    {
+        if ( isset( $config[ 'mail' ] ) )
+        {
+            if ( isset( $config[ 'mail' ][ 'class' ] ) )
+            {
+                $this->bindShared( 'RawPHP\RawMail\Contract\IMail', function () use ( $config )
+                {
+                    $class = $config[ 'mail' ][ 'class' ];
+
+                    return new $class( $config );
+                }
+                );
+            }
+            else
+            {
+                $this->bindShared( 'RawPHP\RawMail\Contract\IMail', function () use ( $config )
+                {
+                    return new Mail( $config );
+                }
+                );
+            }
+        }
+        else
+        {
+            $this->bindShared( 'RawPHP\RawMail\Contract\IMail', function ()
+            {
+                return new Mail();
+            }
+            );
+        }
+
+        $this->alias( 'RawPHP\RawMail\Contract\IMail', 'mail' );
+    }
+
+    /**
+     * Initialise the logger.
+     *
+     * @param array $config
+     */
+    protected function initLog( array $config )
+    {
+        if ( isset( $config[ 'log' ] ) )
+        {
+            if ( isset( $config[ 'log' ][ 'class' ] ) )
+            {
+                $this->bindShared( 'RawPHP\RawLog\Contract\ILog', function () use ( $config )
+                {
+                    $class = $config[ 'log' ][ 'class' ];
+
+                    return new $class( $config[ 'log' ] );
+                }
+                );
+            }
+            else
+            {
+                $this->bindShared( 'RawPHP\RawLog\Contract\ILog', function () use ( $config )
+                {
+                    return new Log( $config[ 'log' ] );
+                }
+                );
+            }
+        }
+        else
+        {
+            $this->bindShared( 'RawPHP\RawLog\Contract\ILog', function ()
+            {
+                return new Log();
+            }
+            );
+        }
+
+        $this->alias( 'RawPHP\RawLog\Contract\ILog', 'log' );
+    }
+
+    /**
      * Initialises the request instance.
      *
      * @param array $config configuration array
@@ -156,11 +242,8 @@ abstract class Application extends Container implements IApplication
                 $this->bindShared( 'RawPHP\RawRequest\Contract\IRequest', function () use ( $config )
                 {
                     $class = $config[ 'request' ][ 'class' ];
-                    /** @var Request $request */
-                    $request = new $class();
-                    $request->init( $config[ 'request' ] );
 
-                    return $request;
+                    return new $class( $config[ 'request' ] );
                 }
                 );
             }
@@ -168,10 +251,7 @@ abstract class Application extends Container implements IApplication
             {
                 $this->bindShared( 'RawPHP\RawRequest\Contract\IRequest', function () use ( $config )
                 {
-                    $request = new Request();
-                    $request->init( $config[ 'request' ] );
-
-                    return $request;
+                    return new Request( $config[ 'request' ] );
                 }
                 );
             }

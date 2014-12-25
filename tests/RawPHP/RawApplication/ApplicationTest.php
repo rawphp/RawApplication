@@ -126,6 +126,22 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test mail setup correctly.
+     */
+    public function testMailSetup()
+    {
+        $this->assertInstanceOf( 'RawPHP\RawMail\Contract\IMail', $this->app[ 'mail' ] );
+    }
+
+    /**
+     * Test log setup correctly.
+     */
+    public function testLogSetup()
+    {
+        $this->assertInstanceOf( 'RawPHP\RawLog\Contract\ILog', $this->app[ 'log' ] );
+    }
+
+    /**
      * Test request setup correctly.
      *
      * @global array self::$config configuration array
