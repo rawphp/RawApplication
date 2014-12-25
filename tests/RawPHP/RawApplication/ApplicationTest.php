@@ -117,6 +117,15 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test that default services have been registered.
+     */
+    public function testDefaultsRegistered()
+    {
+        $this->assertInstanceOf( 'RawPHP\RawDispatcher\Contract\IDispatcher', $this->app[ 'dispatcher' ] );
+        $this->assertInstanceOf( 'RawPHP\RawFileSystem\Contract\IFileSystem', $this->app[ 'files' ] );
+    }
+
+    /**
      * Test request setup correctly.
      *
      * @global array self::$config configuration array
@@ -141,6 +150,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals( self::$config[ 'router' ][ 'default_controller' ], $this->app[ 'router' ]->getDefaultController() );
         $this->assertEquals( self::$config[ 'router' ][ 'default_action' ], $this->app[ 'router' ]->getDefaultAction() );
         $this->assertCount( 1, $this->app[ 'router' ]->getNamespaces() );
+        $this->assertNotNull( $this->app[ 'router' ]->getDispatcher() );
     }
 
     /**
