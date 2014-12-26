@@ -37,6 +37,7 @@ namespace RawPHP\RawApplication;
 
 use RawPHP\RawApplication\Contract\IApplication;
 use RawPHP\RawContainer\Container;
+use RawPHP\RawDatabase\MySql;
 use RawPHP\RawDispatcher\Dispatcher;
 use RawPHP\RawFileSystem\FileSystem;
 use RawPHP\RawLog\Log;
@@ -103,6 +104,8 @@ abstract class Application extends Container implements IApplication
         $this->initMail( $config );
 
         $this->initLog( $config );
+
+        $this->initDatabase( $config );
 
         $this->initRequest( $config );
 
@@ -226,6 +229,46 @@ abstract class Application extends Container implements IApplication
         }
 
         $this->alias( 'RawPHP\RawLog\Contract\ILog', 'log' );
+    }
+
+    /**
+     * Initialise the database.
+     *
+     * @param array $config
+     */
+    protected function initDatabase( array $config )
+    {
+        if ( isset( $config[ 'db' ] ) )
+        {
+            if ( isset( $config[ 'db' ][ 'class' ] ) )
+            {
+                $this->bindShared( 'RawPHP\RawDatabase\Contract\IDatabase', function () use ( $config )
+                {
+                    $class = $config[ 'db' ][ 'class' ];
+
+                    return new $class( $config[ 'db' ] );
+                }
+                );
+            }
+            else
+            {
+                $this->bindShared( 'RawPHP\RawDatabase\Contract\IDatabase', function () use ( $config )
+                {
+                    return new MySql( $config[ 'db' ] );
+                }
+                );
+            }
+        }
+        else
+        {
+            $this->bindShared( 'RawPHP\RawDatabase\Contract\IDatabase', function ()
+            {
+                return new MySql();
+            }
+            );
+        }
+
+        $this->alias( 'RawPHP\RawDatabase\Contract\IDatabase', 'db' );
     }
 
     /**

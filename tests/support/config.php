@@ -179,7 +179,7 @@ return
             [
                 'debug'   => FALSE,
                 'class'   => 'RawPHP\\RawDatabase\\MySql',
-                'db_name' => 'db_name',
+                'db_name' => 'raw_database_test',
                 'db_user' => 'root',
                 'db_pass' => '',
                 'db_host' => 'localhost',
@@ -196,7 +196,7 @@ return
             [
                 'debug'   => FALSE,
                 'class'   => 'RawPHP\\RawDatabase\\MySql',
-                'db_name' => 'db_name_test',
+                'db_name' => 'raw_database_test',
                 'db_user' => 'root',
                 'db_pass' => '',
                 'db_host' => 'localhost',

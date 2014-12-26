@@ -126,6 +126,14 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test database setup correctly.
+     */
+    public function testDatabaseSetup()
+    {
+        $this->assertInstanceOf( 'RawPHP\RawDatabase\Contract\IDatabase', $this->app[ 'db' ] );
+    }
+
+    /**
      * Test mail setup correctly.
      */
     public function testMailSetup()
