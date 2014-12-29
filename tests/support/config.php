@@ -178,11 +178,12 @@ return
         'db'      =>
             [
                 'debug'   => FALSE,
-                'class'   => 'RawPHP\\RawDatabase\\MySql',
+                'class'   => 'RawPHP\\RawDatabase\\Database',
                 'db_name' => 'raw_database_test',
                 'db_user' => 'root',
                 'db_pass' => '',
                 'db_host' => 'localhost',
+                'handler' => 'mysql',
             ],
 
         ################################################################################
@@ -195,11 +196,12 @@ return
         'test_db' =>
             [
                 'debug'   => FALSE,
-                'class'   => 'RawPHP\\RawDatabase\\MySql',
+                'class'   => 'RawPHP\\RawDatabase\\Database',
                 'db_name' => 'raw_database_test',
                 'db_user' => 'root',
                 'db_pass' => '',
                 'db_host' => 'localhost',
+                'handler' => 'mysql',
             ],
 
     ];

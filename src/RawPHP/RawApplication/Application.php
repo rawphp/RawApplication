@@ -37,7 +37,7 @@ namespace RawPHP\RawApplication;
 
 use RawPHP\RawApplication\Contract\IApplication;
 use RawPHP\RawContainer\Container;
-use RawPHP\RawDatabase\MySql;
+use RawPHP\RawDatabase\Database;
 use RawPHP\RawDispatcher\Dispatcher;
 use RawPHP\RawFileSystem\FileSystem;
 use RawPHP\RawLog\Log;
@@ -254,18 +254,10 @@ abstract class Application extends Container implements IApplication
             {
                 $this->bindShared( 'RawPHP\RawDatabase\Contract\IDatabase', function () use ( $config )
                 {
-                    return new MySql( $config[ 'db' ] );
+                    return new Database( $config[ 'db' ] );
                 }
                 );
             }
-        }
-        else
-        {
-            $this->bindShared( 'RawPHP\RawDatabase\Contract\IDatabase', function ()
-            {
-                return new MySql();
-            }
-            );
         }
 
         $this->alias( 'RawPHP\RawDatabase\Contract\IDatabase', 'db' );
